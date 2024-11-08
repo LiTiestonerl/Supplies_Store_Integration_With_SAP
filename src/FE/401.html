@@ -1,85 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+{% include 'header.html' %} <!-- Bao gồm phần header -->
 
-<head>
-    <!-- Google Tag Manager -->
-    <script>(function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({
-                'gtm.start':
-                    new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-TAGCODE');</script>
-    <!-- End Google Tag Manager -->
-    <title>Lỗi 401 - Perfume Store Admin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <!-- External CSS libraries -->
-    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="assets/fonts/font-awesome/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="assets/fonts/flaticon/font/flaticon.css">
-
-    <!-- Google fonts -->
-    <link rel="stylesheet" type="text/css"
-        href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800%7CPoppins:400,500,700,800,900%7CRoboto:100,300,400,400i,500,700">
-
-    <!-- Custom Stylesheet -->
-    <link type="text/css" rel="stylesheet" href="assets/css/styles.css">
-
-</head>
-
-<body id="top">
-    
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TAGCODE" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-    <!-- Page 401 start -->
-    <div class="page-error">
-        <div id="particles"></div>
-        <div class="carousel page-one-error-inner">
-            <h1>Lỗi 401</h1>
-            <h4 class="clearfix">Ooopps.! Bạn không có quyền truy cập trang này!</h4>
-            <h5 class="clearfix">Trang này yêu cầu xác thực, vui lòng đăng nhập để tiếp tục.</h5>
-            <div class="clearfix search-form">
-                <form class="form-inline" action="#" method="GET">
-                    <input type="text" class="form-control" placeholder="Tìm kiếm trang">
-                    <button type="submit" class="btn btn-color">Tìm kiếm</button>
-                </form>
-            </div>
-            <a href="index.html">
-                <i class="fas fa-arrow-left me-1"></i>
-                Trở về Bảng điều khiển
-            </a>
+<div class="page-error">
+    <div id="particles"></div>
+    <div class="carousel page-one-error-inner">
+        <h1>Lỗi 401</h1>
+        <h4 class="clearfix">Ooopps.! Bạn không có quyền truy cập trang này!</h4>
+        <h5 class="clearfix">Trang này yêu cầu xác thực, vui lòng đăng nhập để tiếp tục.</h5>
+        <div class="clearfix search-form">
+            <form class="form-inline" action="#" method="GET">
+                <input type="text" class="form-control" placeholder="Tìm kiếm trang">
+                <button type="submit" class="btn btn-color">Tìm kiếm</button>
+            </form>
         </div>
+        <a href="index.html">
+            <i class="fas fa-arrow-left me-1"></i>
+            Trở về Bảng điều khiển
+        </a>
     </div>
-    <div id="layoutError_footer">
-        <footer class="py-4 bg-light mt-auto">
-            <div class="container-fluid px-4">
-                <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                    <div>
-                        <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms &amp; Conditions</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
-    <!-- Page 401 end -->
+</div>
 
-    <!-- External JS libraries -->
-    <script src="assets/js/jquery-2.2.0.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/particles.min.js"></script>
-    <script src="assets/js/typed.min.js"></script>
-    <script src="assets/js/jquery.mb.YTPlayer.js"></script>
-    <!-- Custom JS Script -->
-    <script src="assets/js/app.js"></script>
+{% include 'footer.html' %} <!-- Bao gồm phần footer -->
+{% include 'scripts.html' %} <!-- Bao gồm phần script -->
 </body>
-
 </html>

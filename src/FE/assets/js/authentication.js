@@ -1,66 +1,54 @@
-// /auth/userinfo.email
-// /auth/userinfo.profile
-const CLIENT_ID =
-  "126101907342-02aiog8v0gil99ubmosejpdb88036le3.apps.googleusercontent.com";
-const LINK_GET_TOKEN = `https://accounts.google.com/o/oauth2/v2/auth?
- scope=https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile
- response_type=token&
- redirect_uri=https://perfume-store-mo-app-web-dashboard.vercel.app/api/auth&
- client_id=${CLIENT_ID}`;
-const BASE_API_URL =
-  "https://perfume-store-mo-app-web-dashboard.vercel.app/api/auth";
+const BACKEND_BASE_URL = "http://localhost:5177";
 
-document
-  .getElementById("loginButton")
-  .addEventListener("click", loginWithGoogle);
+// REDIRECT_URI cần trùng khớp với URL được cấu hình trong Google API Console
+const REDIRECT_URI = "http://127.0.0.1:5500/src/FE/google-response";
 
-function loginWithGoogle() {
-  window.location.href = `${BASE_API_URL}/signin-google`;
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const loginButton = document.getElementById("loginButton");
+
+  if (loginButton) {
+    loginButton.addEventListener("click", () => {
+      console.log("Chuyển hướng tới Google để đăng nhập...");
+      window.location.href = `${BACKEND_BASE_URL}/api/auth/signin-google`;
+    });
+  }
+
+  // Gọi hàm này để lấy JWT sau khi backend chuyển hướng lại trang frontend
+  handleGoogleResponse();
+});
 
 async function handleGoogleResponse() {
   try {
-    const urlParams = new URLSearchParams(window.location.hash.substring(1));
-    const accessToken = urlParams.get("access_token");
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get("code");
 
-    if (!accessToken) {
-      throw new Error("Không tìm thấy access token");
+    if (!code) {
+      return; // Không có mã xác thực, thoát khỏi hàm
     }
 
-    const response = await fetch(`${BASE_API_URL}/google-response`, {
-      method: "POST",
+    // Gửi yêu cầu đến backend để lấy JWT token
+    const response = await fetch(`${BACKEND_BASE_URL}/api/auth/google-response?code=${code}`, {
+      method: "GET",
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
       },
     });
 
     if (!response.ok) {
-      throw new Error("Authentication failed");
+      console.error(`Phản hồi không thành công từ backend. Mã trạng thái: ${response.status}`);
+      return;
     }
 
     const data = await response.json();
 
     if (data.token) {
       localStorage.setItem("jwtToken", data.token);
-      console.log("Đăng nhập thành công!");
-      console.log("Thông tin người dùng:", data);
-
+      console.log("Đăng nhập thành công! Token:", data.token);
       window.location.href = "/index.html";
     } else {
-      console.error("Token không tồn tại");
+      console.error("Không nhận được token từ backend.");
     }
   } catch (error) {
-    console.error("Lỗi:", error);
+    console.error("Lỗi khi xử lý phản hồi từ Google:", error);
   }
-}
-
-if (window.location.pathname.includes("google-response")) {
-  handleGoogleResponse();
-}
-
-document.getElementById("logout").addEventListener("click", logout);
-function logout() {
-  localStorage.removeItem("jwtToken");
-  console.log("Đã đăng xuất");
-  window.location.href = "/login.html";
 }

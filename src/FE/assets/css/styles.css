@@ -10518,11 +10518,11 @@ html {
 #layoutAuthentication {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Căn giữa theo chiều dọc */
-  align-items: center; /* Căn giữa theo chiều ngang */
+  justify-content: center; 
+  align-items: center; 
   min-height: 100vh;
   position: relative;
-  z-index: 1; /* Đảm bảo khung hiển thị trên particles */
+  z-index: 1; 
 }
 #layoutAuthentication #layoutAuthentication_content {
   min-width: 0;
